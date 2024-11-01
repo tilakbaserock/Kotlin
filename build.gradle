@@ -1,25 +1,31 @@
 plugins {
-    id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.3.21'
+    id("org.jetbrains.kotlin.jvm") version "1.9.22"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.22"
 }
 
-group 'main.kotlin.com'
-version '1.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
+group = "org.example"
+version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+    implementation("com.squareup.okhttp3:okhttp:5.0.0-alpha.12")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.1")
+    testImplementation("io.mockk:mockk:1.13.8")
+    implementation("io.strikt:strikt-core:0.35.1")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:5.8.0")
+    testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
 }
 
-compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+tasks.test {
+    useJUnitPlatform()
 }
-compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+
+kotlin {
+    jvmToolchain(17)
 }
